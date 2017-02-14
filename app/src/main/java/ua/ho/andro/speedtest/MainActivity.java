@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             textView.setText(q+" Mb/s" + "\n Yor IP: "+getLocalIpAddress());
-            getLatency("209.185.108.134");
+            //getLatency("209.185.108.134");
         }
     }
     public double getLatency(String ipAddress){

@@ -5,11 +5,13 @@
     android:gravity="center_horizontal"
     android:padding="15dp">
 
-    <Button android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/test_btn"
-        android:text="@string/test_connection"
-        android:layout_marginBottom="10dp"/>
+
+
+    <!--<Button android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/test_btn"-->
+        <!--android:text="@string/test_connection"-->
+        <!--android:layout_marginBottom="10dp"/>-->
 
     <TextView
         android:text="@string/connection_class"
