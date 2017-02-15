@@ -77,16 +77,17 @@ public class MainActivity extends Activity {
                     baos.write(b, 0, read);
                     read = is.read(b);
                 }
+                long em2 = System.currentTimeMillis();
                 int countInBytes = baos.toByteArray().length;
                 int hc = 1048576 / countInBytes;
-                long em2 = System.currentTimeMillis();
+
                 double em3 = ((em2 - em1) * 0.001);
                 double tt = (hc / em3);
                 String spid = Integer.toString(hc) + "/" + Double.toString(em3);
                 String t = spid;
                 String ssss = Double.toString(tt);
                 String formattedDouble = new DecimalFormat("#0.00").format(tt);
-                q = formattedDouble;
+                q = spid;
                 mIcon11 = BitmapFactory.decodeStream(is);
 
             } catch (Exception e) {
