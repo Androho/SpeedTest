@@ -1,38 +1,51 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:padding="15dp">
-
-
-
-    <!--<Button android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:id="@+id/test_btn"-->
-        <!--android:text="@string/test_connection"-->
-        <!--android:layout_marginBottom="10dp"/>-->
-
-    <TextView
-        android:text="@string/connection_class"
-        android:textSize="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/connection_class"
-        android:textSize="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ua.ho.andro.speedtest.MainActivity">
 
     <ProgressBar
-        android:id="@+id/runningBar"
-        style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/circularProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:max="10"
+        android:progress="10"
+        android:progressDrawable="@drawable/spiner"/>
+
+    <TextView
+        android:id="@+id/tv_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:visibility="gone"/>
+        android:layout_centerVertical="true"
+        android:text="progress" />
+    <Button
+        android:id="@+id/btn_start_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="Start Test"
+        android:textSize="20dp"
+        android:textColor="#ffffff"/>
+    <Button
+        android:id="@+id/btn_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary"
+        android:text="Clear"
+        android:textSize="20dp"
+        android:textColor="#ffffff"/>
 
-</LinearLayout>
+
+</RelativeLayout>
