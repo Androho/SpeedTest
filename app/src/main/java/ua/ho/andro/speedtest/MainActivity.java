@@ -23,7 +23,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private String mURL = "http://www.zooclub.ru/skat/img.php?w=700&h=700&img=./attach/12000/12669.jpg";
     private URL url;
     private ProgressBar progressBar;
-    private TextView textView;
+    private TextView textView, tvRes;
     private Button buttonStart;
     private Button buttonClear;
     private static int progressBarStatus = 0;
@@ -37,19 +37,25 @@ public class MainActivity extends Activity implements View.OnClickListener{
         textView = (TextView) findViewById(R.id.tv_progress_bar);
         progressBar = (ProgressBar) findViewById(R.id.circularProgressBar);
         buttonStart = (Button)findViewById(R.id.btn_start_test);
-        buttonClear =(Button)findViewById(R.id.btn_clear);
+//        buttonClear =(Button)findViewById(R.id.btn_clear);
         buttonStart.setOnClickListener(this);
-        buttonClear.setOnClickListener(this);
+//        buttonClear.setOnClickListener(this);
         progressBar.setProgress(progressBarStatus);
         textView.setText(progressBarStatus + " Mb/s");
+        tvRes=(TextView)findViewById(R.id.tv_spid_res);
+        tvRes.setText(progressBarStatus + " Mb/s");
 
     }
 
     public void startSpeedTest() {
-
+        double res = 0;
         for (int i = 0; i < 10; i++) {
             new DownloadImage().execute();
+             res = res+tt;
         }
+        double resres = res/10;
+        String formattedDoubleRes = new DecimalFormat("#0.00").format(resres/10);
+        tvRes.setText(formattedDoubleRes);
     }
 
     public void resetResult() {
@@ -62,8 +68,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (view.getId()){
             case R.id.btn_start_test:
                 startSpeedTest();
-            case R.id.btn_clear:
-                resetResult();
+//            case R.id.btn_clear:
+//                resetResult();
         }
     }
 
@@ -105,9 +111,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String formattedDouble = new DecimalFormat("#0.00").format(tt);
+            String formattedDouble = new DecimalFormat("#0.00").format(tt/10);
             textView.setText(formattedDouble + " Mb/s");
-            progressBar.setProgress(((int) tt) + 1);
+            int pr=(int) tt/10;
+            progressBar.setProgress(pr);
         }
     }
 }

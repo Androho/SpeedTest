@@ -17,8 +17,8 @@
         android:layout_height="200dip"
         android:layout_centerInParent="true"
         android:indeterminate="false"
-        android:max="10"
-        android:progress="10"
+        android:max="100"
+        android:progress="100"
         android:progressDrawable="@drawable/spiner"/>
 
     <TextView
@@ -37,15 +37,22 @@
         android:text="Start Test"
         android:textSize="20dp"
         android:textColor="#ffffff"/>
-    <Button
-        android:id="@+id/btn_clear"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_spid_res"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary"
-        android:text="Clear"
+        android:text="0.00"
         android:textSize="20dp"
-        android:textColor="#ffffff"/>
-
+        android:textColor="#000000"/>
+    <!--<Button-->
+    <!--android:id="@+id/btn_clear"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@color/colorPrimary"-->
+    <!--android:text="Clear"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textColor="#ffffff"/>-->
 
 </RelativeLayout>
