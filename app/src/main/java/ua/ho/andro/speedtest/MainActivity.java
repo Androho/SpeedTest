@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.lzyzsd.circleprogress.ArcProgress;
+
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -22,6 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private static final String DEBUG_TAG ="DEBUG" ;
     private String mURL = "http://www.zooclub.ru/skat/img.php?w=700&h=700&img=./attach/12000/12669.jpg";
     private URL url;
+    private ArcProgress arcProgress;
     private ProgressBar progressBar;
     private TextView textView, tvRes;
     private Button buttonStart;
@@ -34,16 +37,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = (TextView) findViewById(R.id.tv_progress_bar);
-        progressBar = (ProgressBar) findViewById(R.id.circularProgressBar);
+        arcProgress = (ArcProgress)findViewById(R.id.arc_progress);
+        arcProgress.setProgress(progressBarStatus);
+//        textView = (TextView) findViewById(R.id.tv_progress_bar);
+//        progressBar = (ProgressBar) findViewById(R.id.circularProgressBar);
         buttonStart = (Button)findViewById(R.id.btn_start_test);
 //        buttonClear =(Button)findViewById(R.id.btn_clear);
         buttonStart.setOnClickListener(this);
 //        buttonClear.setOnClickListener(this);
-        progressBar.setProgress(progressBarStatus);
-        textView.setText(progressBarStatus + " Mb/s");
-        tvRes=(TextView)findViewById(R.id.tv_spid_res);
-        tvRes.setText(progressBarStatus + " Mb/s");
+//        progressBar.setProgress(progressBarStatus);
+//        textView.setText(progressBarStatus + " Mb/s");
+//        tvRes=(TextView)findViewById(R.id.tv_spid_res);
+//        tvRes.setText(progressBarStatus + " Mb/s");
 
     }
 
@@ -53,9 +58,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
             new DownloadImage().execute();
              res = res+tt;
         }
-        double resres = res/10;
+        int resres = (int) res/10;
         String formattedDoubleRes = new DecimalFormat("#0.00").format(resres/10);
-        tvRes.setText(formattedDoubleRes);
+        arcProgress.setProgress(resres);
     }
 
     public void resetResult() {
@@ -112,9 +117,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             String formattedDouble = new DecimalFormat("#0.00").format(tt/10);
-            textView.setText(formattedDouble + " Mb/s");
+           // textView.setText(formattedDouble + " Mb/s");
             int pr=(int) tt/10;
-            progressBar.setProgress(pr);
+            arcProgress.setProgress(pr);
         }
     }
 }

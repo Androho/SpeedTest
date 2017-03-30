@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,33 +11,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ua.ho.andro.speedtest.MainActivity">
 
-    <ProgressBar
-        android:id="@+id/circularProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="200dip"
-        android:layout_height="200dip"
-        android:layout_centerInParent="true"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="100"
-        android:progressDrawable="@drawable/spiner"/>
 
-    <TextView
-        android:id="@+id/tv_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="progress" />
+    <com.github.lzyzsd.circleprogress.ArcProgress
+        android:id="@+id/arc_progress"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginLeft="50dp"
+        android:visibility="visible"
+        custom:arc_bottom_text="Speed in"
+        custom:arc_progress="55"
+        custom:arc_suffix_text="Mb/s"
+        custom:arc_suffix_text_size="30dp"
+        custom:arc_text_size="70dp"
+        custom:arc_suffix_text_padding="10dp"
+        custom:arc_max="100"
+        custom:arc_bottom_text_size="30dp"
+        custom:arc_finished_color="#31e609"
+        custom:arc_unfinished_color="#ec0808"
+        android:layout_centerInParent="true"/>
+
+    <!--<ProgressBar-->
+        <!--android:id="@+id/circularProgressBar"-->
+        <!--style="?android:attr/progressBarStyleHorizontal"-->
+        <!--android:layout_width="200dip"-->
+        <!--android:layout_height="200dip"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:indeterminate="false"-->
+        <!--android:max="100"-->
+        <!--android:progress="100"-->
+        <!--android:progressDrawable="@drawable/spiner"/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_progress_bar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:text="progress" />-->
     <Button
         android:id="@+id/btn_start_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:text="Start Test"
         android:textSize="20dp"
-        android:textColor="#ffffff"/>
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:id="@+id/tv_spid_res"
         android:layout_width="wrap_content"
@@ -44,7 +68,7 @@
         android:layout_alignParentTop="true"
         android:text="0.00"
         android:textSize="20dp"
-        android:textColor="#000000"/>
+        android:textColor="@color/colorPrimary"/>
     <!--<Button-->
     <!--android:id="@+id/btn_clear"-->
     <!--android:layout_width="match_parent"-->
