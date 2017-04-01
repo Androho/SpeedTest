@@ -28,7 +28,8 @@
         custom:arc_suffix_text_padding="15dp"
         custom:arc_suffix_text_size="20dp"
         custom:arc_text_size="70dp"
-        custom:arc_unfinished_color="#ec0808" />
+        custom:arc_unfinished_color="#ec0808"
+        custom:arc_text_color="@color/colorPrimary"/>
 
     <com.github.lzyzsd.circleprogress.ArcProgress
         android:id="@+id/arc_progress_out"
@@ -48,7 +49,8 @@
         custom:arc_suffix_text_padding="10dp"
         custom:arc_suffix_text_size="10dp"
         custom:arc_text_size="30dp"
-        custom:arc_unfinished_color="#ec0808" />
+        custom:arc_unfinished_color="#ec0808"
+        custom:arc_text_color="@color/colorPrimary"/>
 
     <Button
         android:id="@+id/btn_start_test"
