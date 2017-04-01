@@ -11,7 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ua.ho.andro.speedtest.MainActivity">
 
-
     <com.github.lzyzsd.circleprogress.ArcProgress
         android:id="@+id/arc_progress"
         android:layout_width="200dp"
