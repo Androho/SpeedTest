@@ -19,16 +19,11 @@ import java.text.DecimalFormat;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
-    private static final String TAG = "TEST";
-    private static final String NUMBER_OF_PACKTETS = "10";
-    private static final String DEBUG_TAG ="DEBUG" ;
-    private String mURL = "http://www.zooclub.ru/skat/img.php?w=700&h=700&img=./attach/12000/12669.jpg";
+
+    private String mURL = "https://sonikelf.ru/attach/img/1302869217-clip-64kb.jpg";
     private URL url;
     private ArcProgress arcProgress;
-    private ProgressBar progressBar;
-    private TextView textView, tvRes;
     private Button buttonStart;
-    private Button buttonClear;
     private static int progressBarStatus = 0;
     private String q;
     public double tt;
@@ -39,17 +34,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         arcProgress = (ArcProgress)findViewById(R.id.arc_progress);
         arcProgress.setProgress(progressBarStatus);
-//        textView = (TextView) findViewById(R.id.tv_progress_bar);
-//        progressBar = (ProgressBar) findViewById(R.id.circularProgressBar);
         buttonStart = (Button)findViewById(R.id.btn_start_test);
-//        buttonClear =(Button)findViewById(R.id.btn_clear);
-        buttonStart.setOnClickListener(this);
-//        buttonClear.setOnClickListener(this);
-//        progressBar.setProgress(progressBarStatus);
-//        textView.setText(progressBarStatus + " Mb/s");
-//        tvRes=(TextView)findViewById(R.id.tv_spid_res);
-//        tvRes.setText(progressBarStatus + " Mb/s");
-
     }
 
     public void startSpeedTest() {
@@ -59,13 +44,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
              res = res+tt;
         }
         int resres = (int) res/10;
-        String formattedDoubleRes = new DecimalFormat("#0.00").format(resres/10);
         arcProgress.setProgress(resres);
-    }
-
-    public void resetResult() {
-        progressBar.setProgress(progressBarStatus);
-        textView.setText(progressBarStatus + " Mb/s");
     }
 
     @Override
@@ -73,8 +52,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (view.getId()){
             case R.id.btn_start_test:
                 startSpeedTest();
-//            case R.id.btn_clear:
-//                resetResult();
         }
     }
 
@@ -116,8 +93,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            String formattedDouble = new DecimalFormat("#0.00").format(tt/10);
-           // textView.setText(formattedDouble + " Mb/s");
             int pr=(int) tt/10;
             arcProgress.setProgress(pr);
         }
