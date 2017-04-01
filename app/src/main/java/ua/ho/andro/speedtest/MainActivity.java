@@ -10,6 +10,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -18,7 +20,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private String mURL = "https://sonikelf.ru/attach/img/1302869217-clip-64kb.jpg";
     private URL url;
@@ -27,29 +29,36 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private static int progressBarStatus = 0;
     private String q;
     public double tt;
+    private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        arcProgress = (ArcProgress)findViewById(R.id.arc_progress);
+        arcProgress = (ArcProgress) findViewById(R.id.arc_progress);
         arcProgress.setProgress(progressBarStatus);
-        buttonStart = (Button)findViewById(R.id.btn_start_test);
+        buttonStart = (Button) findViewById(R.id.btn_start_test);
+        buttonStart.setOnClickListener(this);
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
     }
 
     public void startSpeedTest() {
         double res = 0;
         for (int i = 0; i < 10; i++) {
             new DownloadImage().execute();
-             res = res+tt;
+            res = res + tt;
         }
-        int resres = (int) res/10;
+        int resres = (int) res / 10;
         arcProgress.setProgress(resres);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_start_test:
                 startSpeedTest();
         }
@@ -79,7 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 int countInBytes = baos.toByteArray().length;
                 double hc = (double) 1048576 / (double) countInBytes;
 
-                double deltaTime = ((stopTime - startTime)*0.001 );
+                double deltaTime = ((stopTime - startTime) * 0.001);
                 tt = (hc / deltaTime);
                 q = String.valueOf(tt);
 
@@ -93,7 +102,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            int pr=(int) tt/10;
+            int pr = (int) tt / 10;
             arcProgress.setProgress(pr);
         }
     }
