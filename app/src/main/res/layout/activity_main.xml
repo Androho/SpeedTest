@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -12,6 +12,55 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ua.ho.andro.speedtest.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_spid_res"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Your IP"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:layout_alignRight="@+id/tv_spid_res3"
+        android:layout_alignEnd="@+id/tv_spid_res3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tv_spid_res1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Remout IP"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:layout_below="@+id/tv_spid_res"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/tv_spid_res4"
+        android:layout_alignStart="@+id/tv_spid_res4" />
+    <TextView
+        android:id="@+id/tv_spid_res3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="000.00.00.0"
+        android:textColor="@color/colorAccent"
+        android:textSize="20dp"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/tv_spid_res4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="000.00.00.0"
+        android:textColor="@color/colorAccent"
+        android:textSize="20dp"
+        android:layout_below="@+id/tv_spid_res"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"/>
 
     <com.github.lzyzsd.circleprogress.ArcProgress
         android:id="@+id/arc_progress"
@@ -29,9 +78,9 @@
         custom:arc_suffix_text="Mb/s"
         custom:arc_suffix_text_padding="15dp"
         custom:arc_suffix_text_size="20dp"
+        custom:arc_text_color="@color/colorPrimary"
         custom:arc_text_size="70dp"
-        custom:arc_unfinished_color="#ec0808"
-        custom:arc_text_color="@color/colorPrimary"/>
+        custom:arc_unfinished_color="@color/colorAccent" />
 
     <com.github.lzyzsd.circleprogress.ArcProgress
         android:id="@+id/arc_progress_out"
@@ -50,37 +99,28 @@
         custom:arc_suffix_text="Mb/s"
         custom:arc_suffix_text_padding="10dp"
         custom:arc_suffix_text_size="10dp"
+        custom:arc_text_color="@color/colorPrimary"
         custom:arc_text_size="30dp"
-        custom:arc_unfinished_color="#ec0808"
-        custom:arc_text_color="@color/colorPrimary"/>
+        custom:arc_unfinished_color="@color/colorAccent" />
 
     <Button
         android:id="@+id/btn_start_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/adView"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:background="@color/colorPrimary"
         android:text="Start Test"
         android:textColor="#ffffff"
-        android:textSize="20dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_above="@+id/adView"/>
-
-    <TextView
-        android:id="@+id/tv_spid_res"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="0.00"
-        android:textColor="@color/colorPrimary"
         android:textSize="20dp" />
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
