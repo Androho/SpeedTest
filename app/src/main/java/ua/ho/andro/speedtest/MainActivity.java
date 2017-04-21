@@ -75,6 +75,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 byte[] b = new byte[2 ^ 16];
                 InputStream is = url.openStream();
+                url.getPath();
+                url.getHost();
                 long startTime = System.currentTimeMillis();
                 int read = is.read(b);
                 while (read > -1) {
