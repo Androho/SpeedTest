@@ -15,33 +15,33 @@
     android:background="@color/colorBg">
 
     <TextView
-        android:id="@+id/tv_spid_res"
+        android:id="@+id/tv_speed_res"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Your IP"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp"
-        android:layout_alignRight="@+id/tv_spid_res3"
-        android:layout_alignEnd="@+id/tv_spid_res3"
+        android:layout_alignRight="@+id/tv_speed_res3"
+        android:layout_alignEnd="@+id/tv_speed_res3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/tv_spid_res1"
+        android:id="@+id/tv_speed_res1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="Remout IP"
         android:textColor="@color/colorPrimary"
         android:textSize="20dp"
-        android:layout_below="@+id/tv_spid_res"
+        android:layout_below="@+id/tv_speed_res"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignLeft="@+id/tv_spid_res4"
-        android:layout_alignStart="@+id/tv_spid_res4" />
+        android:layout_alignLeft="@+id/tv_speed_res4"
+        android:layout_alignStart="@+id/tv_speed_res4" />
     <TextView
-        android:id="@+id/tv_spid_res3"
+        android:id="@+id/tv_speed_res3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -51,14 +51,14 @@
         android:layout_marginTop="40dp"/>
 
     <TextView
-        android:id="@+id/tv_spid_res4"
+        android:id="@+id/tv_speed_res4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:text="000.00.00.0"
         android:textColor="@color/colorAccent"
         android:textSize="20dp"
-        android:layout_below="@+id/tv_spid_res"
+        android:layout_below="@+id/tv_speed_res"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp"/>
@@ -114,6 +114,14 @@
         android:text="Start Test"
         android:textColor="#ffffff"
         android:textSize="20dp" />
+    <ImageView
+        android:id="@+id/signal_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/googleg_standard_color_18"
+        android:layout_alignBottom="@+id/tv_speed_res3"
+        android:layout_alignRight="@+id/arc_progress"
+        android:layout_alignEnd="@+id/arc_progress" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

@@ -79,7 +79,6 @@ public class PingIP {
         } catch (InterruptedException e) {
 
             e.printStackTrace();
-
         }
     }
 }
