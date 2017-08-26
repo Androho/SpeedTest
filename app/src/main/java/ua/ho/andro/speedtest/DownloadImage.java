@@ -3,57 +3,90 @@ package ua.ho.andro.speedtest;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
+import fr.bmartel.speedtest.SpeedTestReport;
+import fr.bmartel.speedtest.SpeedTestSocket;
+import fr.bmartel.speedtest.inter.ISpeedTestListener;
+import fr.bmartel.speedtest.model.SpeedTestError;
 
-class DownloadImage extends AsyncTask<Object, Object, String> {
+class DownloadImage extends AsyncTask<Integer, Integer, String> {
 
     private MainActivity mainActivity;
+    long v;
 
     public DownloadImage(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
     @Override
-    protected String doInBackground(Object... strings) {
-        try {
-            mainActivity.url = new URL(mainActivity.connectionURL);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] b = new byte[2 ^ 16];
-            InputStream is = mainActivity.url.openStream();
-            mainActivity.url.getPath();
-            mainActivity.url.getHost();
-            long startTime = System.currentTimeMillis();
-            int read = is.read(b);
-            while (read > -1) {
-                baos.write(b, 0, read);
-                read = is.read(b);
+    protected String doInBackground(Integer... params) {
+
+        SpeedTestSocket speedTestSocket = new SpeedTestSocket();
+
+        // add a listener to wait for speedtest completion and progress
+        speedTestSocket.addSpeedTestListener(new ISpeedTestListener() {
+
+            @Override
+            public void onCompletion(SpeedTestReport report) {
+                // called when download/upload is finished
+                Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
+                Log.v("speedtest", "[COMPLETED] rate in bit/s   : " + report.getTransferRateBit());
+            long u=report.getReportTime()-report.getStartTime();
+                long w =(report.getTotalPacketSize()/1000)/(u/1000);
+                int c = (int) w;
             }
-            long stopTime = System.currentTimeMillis();
-            int countInBytes = baos.toByteArray().length;
-            double hc = (double) 1048576 / (double) countInBytes;
 
-            double deltaTime = ((stopTime - startTime) * 0.001);
-            mainActivity.tt = (hc / deltaTime);
-            mainActivity.q = String.valueOf(mainActivity.tt);
+            @Override
+            public void onError(SpeedTestError speedTestError, String errorMessage) {
+                // called when a download/upload error occur
+            }
 
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
+            @Override
+            public void onProgress(float percent, SpeedTestReport report) {
+                // called to notify download/upload progress
+                long start = report.getStartTime();
+                long stop = report.getReportTime();
+                long time =stop-start;
+                long size = report.getTemporaryPacketSize();
+                v = size/time;
+                int vv = (int) v;
+                int pp= (int) percent;
+                Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
+                Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
+                Log.v("speedtest", "[PROGRESS] rate in bit/s   : " + report.getTransferRateBit());
+
+                publishProgress(vv);
+                //publishProgress(pp);
+            }
+        });
+
+        speedTestSocket.startDownload("http://2.testdebit.info/fichiers/1Mo.dat");
+
+        return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        mainActivity.arcProgress.setProgress(values[0]);
+        //mainActivity.progressBar.setProgress(values[0]);
+        if(values[0]<10){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_1);
+        }else if (10<values[0] && values[0]<20){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_2);
+        }else if (20<values[0] && values[0]<30){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_3);
+        }else if (30<values[0] && values[0]<50){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_4);
+        }else if (50<values[0] && values[0]<70){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_5);
+        }else if (70<values[0] && values[0]<100){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_6);
         }
-        return mainActivity.q;
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        int pr = (int) mainActivity.tt / 10;
-        mainActivity.connectionProgress.setProgress(pr);
+        mainActivity.progressBar.setProgress(0);
     }
 }

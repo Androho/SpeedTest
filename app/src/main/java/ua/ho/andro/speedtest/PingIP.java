@@ -1,91 +1,66 @@
 package ua.ho.andro.speedtest;
 
-import java.io.BufferedReader;
+import android.os.AsyncTask;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
-import static android.R.attr.host;
-import static android.R.attr.port;
+public class PingIP extends AsyncTask<Object, Object, String> {
+    private Elements li = null;
+    private MainActivity mainActivity;
+    private String title;
 
-public class PingIP {
-
-    public static void runSystemCommand(String command) {
-
-        try {
-            Process p = Runtime.getRuntime().exec(command);
-            BufferedReader inputStream = new BufferedReader(
-                    new InputStreamReader(p.getInputStream()));
-
-            String s = "";
-            // reading output stream of the command
-            while ((s = inputStream.readLine()) != null) {
-                System.out.println(s);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public PingIP(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    @Override
+    protected String doInBackground(Object... params) {
+        String url = "https://www.google.com";
+        String concole = null;
 
-        System.out.println("Ping Poller Starts...");
 
-        String ipAddress = "triadalawyers.com.ua";
+            concole = "ping -c 1 " + url;
 
+        Process myProcess = null;
         try {
-
-            Socket socket = new Socket(ipAddress,80);
-
-            InputStream in = socket.getInputStream();
-
-            OutputStream out = socket.getOutputStream();
-
-            byte[] buffer = new byte[40];
-
-            System.out.println("Connected.");
-
-            for (int i = 0; i < 1000; i++) {
-
-                out.write(buffer);
-
-                System.out.print("+");
-
-                while (in.available() < 39) {
-
-                    Thread.currentThread().sleep(1);
-
-                }
-
-                in.read(buffer);
-
-                System.out.print("-");
-
-            }
-
-            out.write((byte)32);
-
-            System.out.println("\nDone.");
-
+            myProcess = Runtime.getRuntime().exec(concole);
         } catch (IOException e) {
-
-            e.printStackTrace();
-
-        } catch (InterruptedException e) {
-
             e.printStackTrace();
         }
+        try {
+            myProcess.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Document doc = null;
+        try {
+            doc = Jsoup.connect("http://checkip.org/").get();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        if (doc != null) {
+            Elements ul = doc.select("h1");
+            li = ul.select("li");
+            title = ul.toString();
+        } else title = "0";
+
+        return title;
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        String text;
+        if (title != null) {
+            text = title.substring(title.indexOf(";\">") + 3, title.indexOf("</span"));
+        } else
+            text = "No inet";
+        mainActivity.tvYourIp.setText(text);
+
     }
 }
-
-//        String ip = "google.com";
-//        runSystemCommand("ping " + ip);
-//
-//
-//    }
-//}
