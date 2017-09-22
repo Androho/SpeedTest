@@ -38,6 +38,7 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
             @Override
             public void onError(SpeedTestError speedTestError, String errorMessage) {
                 // called when a download/upload error occur
+                Log.v("speedtest", "Error : " + speedTestError.name());
             }
 
             @Override

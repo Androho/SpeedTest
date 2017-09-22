@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public TextView tvYourIp;
     public ProgressBar progressBar;
     public ImageView ivWifi;
+    public ProgressBar connectionProgress;
 
 
     @Override

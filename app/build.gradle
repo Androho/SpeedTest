@@ -29,6 +29,8 @@ dependencies {
     compile 'com.facebook.network.connectionclass:connectionclass:1.0.1'
     compile 'com.github.lzyzsd:circleprogress:1.2.1'
     compile 'com.google.firebase:firebase-ads:10.0.1'
+    compile 'fr.bmartel:jspeedtest:1.31.2'
+    compile 'org.jsoup:jsoup:1.10.3'
     testCompile 'junit:junit:4.12'
 }
 
