@@ -55,8 +55,9 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
                 Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
                 Log.v("speedtest", "[PROGRESS] rate in bit/s   : " + report.getTransferRateBit());
 
-                publishProgress(vv);
+                publishProgress(vv/10);
                 //publishProgress(pp);
+                mainActivity.progressBar.setProgress(pp);
             }
         });
 

@@ -29,6 +29,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public ProgressBar progressBar;
     public ImageView ivWifi;
     public ProgressBar connectionProgress;
+    private final static int SOCKET_TIMEOUT = 5000;
+    private final static String SPEED_TEST_SERVER_URI_DL = "http://2.testdebit.info/fichiers/10Mo.dat";
 
 
     @Override
@@ -39,16 +41,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
         arcProgress.setProgress(progressBarStatus);
         buttonStart = (Button) findViewById(R.id.btn_start_test);
         buttonStart.setOnClickListener(this);
-        tvYourIp=(TextView)findViewById(R.id.tv_your_ip_dat);
+        tvYourIp = (TextView) findViewById(R.id.tv_your_ip_dat);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        ivWifi = (ImageView)findViewById(R.id.iv_signal_rang);
+        ivWifi = (ImageView) findViewById(R.id.iv_signal_rang);
         ivWifi.setImageResource(R.drawable.ic_wifi_1);
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        new PingIP(this).execute();
+        //new PingIP(this).execute();
+
     }
+
 
     public void startSpeedTest() {
         double res = 0;
