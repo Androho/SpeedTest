@@ -12,6 +12,9 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
 
     private MainActivity mainActivity;
     long v;
+    int vv;
+    int pp;
+    int res;
 
     public DownloadImage(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -31,8 +34,9 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
                 Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
                 Log.v("speedtest", "[COMPLETED] rate in bit/s   : " + report.getTransferRateBit());
             long u=report.getReportTime()-report.getStartTime();
-                long w =(report.getTotalPacketSize()/1000)/(u/1000);
-                int c = (int) w;
+//                long w =(report.getTotalPacketSize()/1000)/(u/1000);
+//                int c = (int) w;
+                res= report.getTransferRateBit().intValue();
             }
 
             @Override
@@ -49,15 +53,10 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
                 long time =stop-start;
                 long size = report.getTemporaryPacketSize();
                 v = size/time;
-                int vv = (int) v;
-                int pp= (int) percent;
-                Log.v("speedtest", "[PROGRESS] progress : " + percent + "%");
-                Log.v("speedtest", "[PROGRESS] rate in octet/s : " + report.getTransferRateOctet());
-                Log.v("speedtest", "[PROGRESS] rate in bit/s   : " + report.getTransferRateBit());
+                 vv = (int) v;
+                pp= (int) percent;
+                publishProgress(pp);
 
-                publishProgress(vv/10);
-                //publishProgress(pp);
-                mainActivity.progressBar.setProgress(pp);
             }
         });
 
@@ -69,26 +68,28 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        mainActivity.arcProgress.setProgress(values[0]);
-        //mainActivity.progressBar.setProgress(values[0]);
-        if(values[0]<10){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_1);
-        }else if (10<values[0] && values[0]<20){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_2);
-        }else if (20<values[0] && values[0]<30){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_3);
-        }else if (30<values[0] && values[0]<50){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_4);
-        }else if (50<values[0] && values[0]<70){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_5);
-        }else if (70<values[0] && values[0]<100){
-            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_6);
-        }
+        //mainActivity.arcProgress.setProgress(values[0]);
+       mainActivity.progressBar.setProgress(pp);
+        mainActivity.arcProgress.setProgress(vv/10);
+//        if(values[0]<10){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_1);
+//        }else if (10<values[0] && values[0]<20){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_2);
+//        }else if (20<values[0] && values[0]<30){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_3);
+//        }else if (30<values[0] && values[0]<50){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_4);
+//        }else if (50<values[0] && values[0]<70){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_5);
+//        }else if (70<values[0] && values[0]<100){
+//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_6);
+//        }
     }
 
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+        mainActivity.arcProgress.setProgress(res/10000);
         mainActivity.progressBar.setProgress(0);
     }
 }

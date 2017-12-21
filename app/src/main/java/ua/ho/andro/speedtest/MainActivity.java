@@ -25,7 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public String q;
     public double tt;
     private AdView mAdView;
-    public TextView tvYourIp;
+    public TextView tvYourIp, tvRemoutIp;
     public ProgressBar progressBar;
     public ImageView ivWifi;
     public ProgressBar connectionProgress;
@@ -42,6 +42,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         buttonStart = (Button) findViewById(R.id.btn_start_test);
         buttonStart.setOnClickListener(this);
         tvYourIp = (TextView) findViewById(R.id.tv_your_ip_dat);
+        tvRemoutIp=(TextView)findViewById(R.id.tv_remout_ip_dat);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         ivWifi = (ImageView) findViewById(R.id.iv_signal_rang);
         ivWifi.setImageResource(R.drawable.ic_wifi_1);
@@ -49,19 +50,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        //new PingIP(this).execute();
+        new PingMyIP(this).execute();
+        new PingRemoutIP(this).execute();
 
-    }
-
-
-    public void startSpeedTest() {
-        double res = 0;
-        for (int i = 0; i < 10; i++) {
-            new DownloadImage(this).execute();
-            res = res + tt;
-        }
-        int resres = (int) res / 10;
-        arcProgress.setProgress(resres);
     }
 
     @Override
@@ -69,7 +60,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_start_test:
                 new DownloadImage(this).execute();
-                //startSpeedTest();
         }
     }
 }
