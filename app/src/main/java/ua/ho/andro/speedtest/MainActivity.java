@@ -19,7 +19,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public String mURL = "https://sonikelf.ru/attach/img/1302869217-clip-64kb.jpg";
     public URL url;
-    public ArcProgress arcProgress;
+    public ArcProgress arcProgress,arcProgressOut;
     private Button buttonStart;
     private static int progressBarStatus = 0;
     public String q;
@@ -39,6 +39,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         arcProgress = (ArcProgress) findViewById(R.id.arc_progress);
         arcProgress.setProgress(progressBarStatus);
+        arcProgressOut=(ArcProgress) findViewById(R.id.arc_progress_out);
+        arcProgressOut.setProgress(progressBarStatus);
         buttonStart = (Button) findViewById(R.id.btn_start_test);
         buttonStart.setOnClickListener(this);
         tvYourIp = (TextView) findViewById(R.id.tv_your_ip_dat);
@@ -59,7 +61,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_start_test:
-                new DownloadImage(this).execute();
+                new DownloadTest(this).execute();
         }
     }
 }

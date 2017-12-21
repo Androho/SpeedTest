@@ -8,7 +8,7 @@ import fr.bmartel.speedtest.SpeedTestSocket;
 import fr.bmartel.speedtest.inter.ISpeedTestListener;
 import fr.bmartel.speedtest.model.SpeedTestError;
 
-class DownloadImage extends AsyncTask<Integer, Integer, String> {
+class DownloadTest extends AsyncTask<Integer, Integer, Integer> {
 
     private MainActivity mainActivity;
     long v;
@@ -16,12 +16,12 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
     int pp;
     int res;
 
-    public DownloadImage(MainActivity mainActivity) {
+    public DownloadTest(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
 
     @Override
-    protected String doInBackground(Integer... params) {
+    protected Integer doInBackground(Integer... params) {
 
         SpeedTestSocket speedTestSocket = new SpeedTestSocket();
 
@@ -31,11 +31,6 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
             @Override
             public void onCompletion(SpeedTestReport report) {
                 // called when download/upload is finished
-                Log.v("speedtest", "[COMPLETED] rate in octet/s : " + report.getTransferRateOctet());
-                Log.v("speedtest", "[COMPLETED] rate in bit/s   : " + report.getTransferRateBit());
-            long u=report.getReportTime()-report.getStartTime();
-//                long w =(report.getTotalPacketSize()/1000)/(u/1000);
-//                int c = (int) w;
                 res= report.getTransferRateBit().intValue();
             }
 
@@ -48,10 +43,10 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
             @Override
             public void onProgress(float percent, SpeedTestReport report) {
                 // called to notify download/upload progress
-                long start = report.getStartTime();
-                long stop = report.getReportTime();
-                long time =stop-start;
-                long size = report.getTemporaryPacketSize();
+                    long start = report.getStartTime();
+                    long stop = report.getReportTime();
+                    long time =stop-start;
+                    long size = report.getTemporaryPacketSize();
                 v = size/time;
                  vv = (int) v;
                 pp= (int) percent;
@@ -61,8 +56,7 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
         });
 
         speedTestSocket.startDownload("http://2.testdebit.info/fichiers/1Mo.dat");
-
-        return null;
+        return res;
     }
 
     @Override
@@ -87,9 +81,9 @@ class DownloadImage extends AsyncTask<Integer, Integer, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(Integer s) {
         super.onPostExecute(s);
-        mainActivity.arcProgress.setProgress(res/10000);
+        mainActivity.arcProgress.setProgress(s/10000);
         mainActivity.progressBar.setProgress(0);
     }
 }
