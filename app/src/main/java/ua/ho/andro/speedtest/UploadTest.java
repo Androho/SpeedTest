@@ -70,6 +70,8 @@ public class UploadTest extends AsyncTask<Integer, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer integer) {
         super.onPostExecute(integer);
+        mainActivity.progressBar.setProgress(0);
+        mainActivity.arcProgressOut.setProgress(integer/10000);
     }
 
 

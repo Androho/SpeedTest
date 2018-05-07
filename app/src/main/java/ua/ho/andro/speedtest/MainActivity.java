@@ -12,13 +12,8 @@ import com.github.lzyzsd.circleprogress.ArcProgress;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-import java.net.URL;
+public class MainActivity extends Activity implements View.OnClickListener, EndTaskListener {
 
-
-public class MainActivity extends Activity implements View.OnClickListener {
-
-    public String mURL = "https://sonikelf.ru/attach/img/1302869217-clip-64kb.jpg";
-    public URL url;
     public ArcProgress arcProgress,arcProgressOut;
     private Button buttonStart;
     private static int progressBarStatus = 0;
@@ -29,9 +24,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public ProgressBar progressBar;
     public ImageView ivWifi;
     public ProgressBar connectionProgress;
-    private final static int SOCKET_TIMEOUT = 5000;
-    private final static String SPEED_TEST_SERVER_URI_DL = "http://2.testdebit.info/fichiers/10Mo.dat";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +55,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.btn_start_test:
                 new DownloadTest(this).execute();
         }
+    }
+
+    @Override
+    public void onDownloadFinished() {
+        new UploadTest(this).execute();
+        new SignalLevel(this,this).execute();
+    }
+
+    @Override
+    public void onUploadFinished() {
+
     }
 }
 

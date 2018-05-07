@@ -11,10 +11,10 @@ import fr.bmartel.speedtest.model.SpeedTestError;
 class DownloadTest extends AsyncTask<Integer, Integer, Integer> {
 
     private MainActivity mainActivity;
-    long v;
-    int vv;
-    int pp;
-    int res;
+    private long v;
+    private int vv;
+    private int pp;
+    private int res;
 
     public DownloadTest(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -65,19 +65,22 @@ class DownloadTest extends AsyncTask<Integer, Integer, Integer> {
         //mainActivity.arcProgress.setProgress(values[0]);
        mainActivity.progressBar.setProgress(pp);
         mainActivity.arcProgress.setProgress(vv/10);
-//        if(values[0]<10){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_1);
-//        }else if (10<values[0] && values[0]<20){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_2);
-//        }else if (20<values[0] && values[0]<30){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_3);
-//        }else if (30<values[0] && values[0]<50){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_4);
-//        }else if (50<values[0] && values[0]<70){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_5);
-//        }else if (70<values[0] && values[0]<100){
-//            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_6);
-//        }
+        if(values[0]<10){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_1);
+        }else if (10<values[0] && values[0]<20){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_2);
+        }else if (20<values[0] && values[0]<30){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_3);
+        }else if (30<values[0] && values[0]<50){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_4);
+        }else if (50<values[0] && values[0]<70){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_5);
+        }else if (70<values[0] && values[0]<100){
+            mainActivity.ivWifi.setImageResource(R.drawable.ic_wifi_6);
+        }
+        if (values[0]==100){
+            mainActivity.onDownloadFinished();
+        }
     }
 
     @Override
